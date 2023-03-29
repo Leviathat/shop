@@ -1,10 +1,10 @@
 from datetime import timedelta, datetime
-
 import jwt
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.contrib.auth.models import PermissionsMixin
 
 
 class UserManager(BaseUserManager):
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True, default=None)
     phone_number = models.CharField(db_index=True, max_length=11, unique=True)
     first_name = models.CharField(max_length=40, blank=True)
@@ -37,6 +37,7 @@ class User(AbstractBaseUser):
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'phone_number'
     EMAIL_FIELD = 'email'
@@ -61,7 +62,7 @@ class User(AbstractBaseUser):
         """
 
         # Установка даты истечения токена через 7 дней
-        exp = datetime.now() + timedelta(seconds=5)
+        exp = datetime.now() + timedelta(days=7)
 
         # Установка параметров заголовка токена
         headers = {'typ': 'jwt', 'alg': 'HS256'}

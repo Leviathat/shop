@@ -92,8 +92,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'phone_number', 'password', 'first_name', 'last_name', 'token']
-        read_only_fields = ('token', 'id')
+        fields = ['id', 'email', 'phone_number', 'password', 'first_name', 'last_name']
+        read_only_fields = ('id',)
 
     def update(self, instance, validated_data):
         """ Обновление User """

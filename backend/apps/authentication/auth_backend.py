@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 import jwt
 from django.conf import settings
@@ -31,6 +31,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         return self._authenticate_credentials(request, token)
 
     def _authenticate_credentials(self, request, token):
+
         try:
             decoded = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
 
@@ -38,9 +39,9 @@ class JWTAuthentication(authentication.BaseAuthentication):
             raise AuthenticationFailed('Invalid token')
 
         expiration_time = datetime.utcfromtimestamp(decoded['exp'])
-        current_time = datetime.utcnow()
+        current_time = datetime.now()
 
-        if current_time < expiration_time:
+        if current_time > expiration_time:
             raise AuthenticationFailed('Expired token')
 
         # МОГ БЫ СДЕЛАТЬ ТАК НАПИСАНО НИЖЕ, НО БЛЯТЬ PYJWT НЕ ХОЧЕТ СУКА КЛЮЧИ С ИСТЕКШИМ СРОКОМ ПРИЗАВАТЬ ЗА ИНВАЛИДОВ

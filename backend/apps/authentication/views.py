@@ -8,12 +8,13 @@ from .serializers import (
     LoginSerializer,
     UserSerializer
 )
-from .renderers import UserJSONRenderer
+from .renderers import LoginJSONRenderer
 
 
 class RegistrationAPIView(APIView):
     permission_classes = (AllowAny,)
     serializer_class = RegistrationSerializer
+    renderer_classes = (LoginJSONRenderer,)
 
     def post(self, request):
         user = request.data.get('user', {})
@@ -29,7 +30,7 @@ class RegistrationAPIView(APIView):
 
 class LoginAPIView(APIView):
     permission_classes = (AllowAny,)
-    # renderer_classes = (UserJSONRenderer,)
+    renderer_classes = (LoginJSONRenderer,)
     serializer_class = LoginSerializer
 
     def post(self, request):

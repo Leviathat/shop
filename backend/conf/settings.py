@@ -45,7 +45,7 @@ AUTH_USER_MODEL = 'authentication.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'apps.authentication.auth_backend.JWTAuthentication',
-    )
+    ),
 }
 
 ROOT_URLCONF = 'conf.urls'
