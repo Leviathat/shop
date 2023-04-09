@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db import IntegrityError
 from apps.product.models import Product, ProductImage, Category
 
 
@@ -6,6 +7,15 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'name')
+        read_only_fields = ('id', )
+
+    def create(self, validated_data):
+        try:
+            instance = Category.objects.create(**validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError('Category with this name already exists')
+
+        return instance
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -27,7 +37,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'description', 'price', 'images', 'uploaded_images', 'categories', 'categories_data')
+        fields = ('id', 'name', 'description', 'price', 'images', 'uploaded_images', 'categories', 'categories_data',
+                  'rating')
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop("uploaded_images")

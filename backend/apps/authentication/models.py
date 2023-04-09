@@ -32,8 +32,8 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True, default=None)
     phone_number = models.CharField(db_index=True, max_length=11, unique=True)
-    first_name = models.CharField(max_length=40, blank=True)
-    last_name = models.CharField(max_length=40, blank=True)
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

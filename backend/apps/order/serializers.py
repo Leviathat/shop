@@ -4,25 +4,42 @@ from apps.order.models import Order, OrderProduct
 
 
 class OrderProductSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = OrderProduct
-        fields = ('id', 'order', 'product', 'quantity')
-        read_only_fields = ('id', 'order',)
+        fields = ('id', 'product', 'quantity')
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    products = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Order
+        fields = ('id', 'customer', 'status', 'created_at', 'updated_at', 'products', 'total_amount')
+
+    def get_products(self, order):
+        order_products = OrderProduct.objects.filter(order=order).select_related('product')
+        return OrderProductSerializer(order_products, many=True).data
+
+    def get_status_display(self, obj):
+        return dict(Order.STATUS_CHOICES)[obj.status]
+
+
+class NewOrderSerializer(serializers.ModelSerializer):
     products = OrderProductSerializer(many=True, write_only=True)
     status_display = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
-        fields = ('id', 'status', 'status_display', 'created_at', 'products', 'total_amount', 'customer')
-        read_only_fields = ('id', 'created_at', 'status_display',)
+        fields = ('id', 'status', 'status_display', 'created_at', 'products', 'total_amount', 'customer', )
+        read_only_fields = ('id', 'created_at', 'status_display', 'status', )
+
+    def validate_products(self, products):
+        if not products:
+            raise serializers.ValidationError('Must be at least one product to make order')
+        return products
 
     def create(self, validated_data):
         products_data = validated_data.pop('products')
-
         order = Order.objects.create(**validated_data)
 
         for product_data in products_data:
@@ -58,3 +75,4 @@ class OrderCancellationSerializer(serializers.ModelSerializer):
         instance.status = 5
         instance.save()
         return instance
+

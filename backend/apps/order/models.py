@@ -21,6 +21,9 @@ class Order(models.Model):
     def __str__(self):
         return f'Order #{self.pk}'
 
+    class Meta:
+        db_table = 'order'
+
 
 class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -29,3 +32,6 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return f'{self.quantity} x {self.product.name}'
+
+    class Meta:
+        db_table = 'order_product'
