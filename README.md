@@ -1,4 +1,4 @@
-# **SHOP** _`RESTfull API based on DRF`_
+# **SHOP** `RESTfull API based on DRF`
 
 ![](https://img.shields.io/badge/python-3.9.0-3174AC)
 ![](https://img.shields.io/badge/Django-v4.1.7-green)
