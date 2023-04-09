@@ -1,4 +1,4 @@
-# `JWT AUTHENTICATION APP`
+# **SHOP** _`RESTfull API based on DRF`_
 
 ![](https://img.shields.io/badge/python-3.9.0-3174AC)
 ![](https://img.shields.io/badge/Django-v4.1.7-green)
@@ -7,7 +7,7 @@
 
 # Getting started
 
-Prepare virtual environment
+**Prepare virtual environment**
 
     $ virtualenv venv 
 
@@ -15,13 +15,13 @@ Prepare virtual environment
 
     $ pip install -r requirements.txt
 
-Run application
+**Run application**
 
     $ python ./backend/manage.py migrate 
 
     $ python ./backend/manage.py runserver
 
-## **Checkout http://127.0.0.1:8000/docs/**
-
 ___
->  **Here is little sum of all things what I've done in this simple project**
+>  **You can check out documentation on following link** `↓`
+> 
+> **[DOCUMENTATION](https://documenter.getpostman.com/view/16363895/2s93XsWkAx)**
