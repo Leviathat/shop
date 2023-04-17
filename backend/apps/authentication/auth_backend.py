@@ -37,15 +37,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
         except jwt.exceptions.DecodeError:
             raise AuthenticationFailed('Invalid token')
 
-        expiration_time = datetime.utcfromtimestamp(decoded['exp'])
-        current_time = datetime.now()
-
-        if current_time > expiration_time:
+        except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Expired token')
-
-        # МОГ БЫ СДЕЛАТЬ ТАК НАПИСАНО НИЖЕ, НО БЛЯТЬ PYJWT НЕ ХОЧЕТ СУКА КЛЮЧИ С ИСТЕКШИМ СРОКОМ ПРИЗАВАТЬ ЗА ИНВАЛИДОВ
-        # except jwt.exceptions.ExpiredSignatureError:
-        #     raise AuthenticationFailed('Expired token')
 
         try:
             user = User.objects.get(pk=decoded['id'])

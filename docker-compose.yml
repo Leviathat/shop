@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13-alpine
+    env_file: ./backend/.env
+    environment:
+      - POSTGRES_DB=shop_db
+      - POSTGRES_USER=shop_admin
+      - POSTGRES_PASSWORD=488719
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: gunicorn conf.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    working_dir: /code/backend
+
+volumes:
+  postgres-data:
