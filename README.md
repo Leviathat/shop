@@ -7,21 +7,10 @@
 
 # Getting started
 
-**Prepare virtual environment**
-
-    $ virtualenv venv 
-
-    $ .\venv\Scripts\activate
-
-    $ pip install -r requirements.txt
-
-**Run application**
-
-    $ python ./backend/manage.py migrate 
-
-    $ python ./backend/manage.py runserver
+    $ docker-compose up 
 
 ___
+
 >  **You can check out documentation on following link** `↓`
 > 
 > **[DOCUMENTATION](https://documenter.getpostman.com/view/16363895/2s93XsWkAx)**
