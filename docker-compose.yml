@@ -5,15 +5,15 @@ services:
     image: postgres:13-alpine
     env_file: ./backend/.env
     environment:
-      - POSTGRES_DB=shop_db
-      - POSTGRES_USER=shop_admin
-      - POSTGRES_PASSWORD=488719
+      - POSTGRES_DB=db
+      - POSTGRES_USER=admi
+      - POSTGRES_PASSWORD=pass
     volumes:
       - postgres-data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
 
-  app:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -25,6 +25,15 @@ services:
     depends_on:
       - db
     working_dir: /code/backend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
 
 volumes:
   postgres-data:

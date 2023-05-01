@@ -9,4 +9,8 @@ urlpatterns = [
     path('api/products/', include('apps.product.urls')),
     path('api/order/', include('apps.order.urls')),
     path('api/review/', include('apps.product_reviews.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+

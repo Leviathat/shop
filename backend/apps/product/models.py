@@ -8,7 +8,8 @@ def get_image_path(instance, filename):
     now = timezone.now()
     delta = timezone.timedelta(days=30)
     random_timestamp = now - delta * random.random()
-    return os.path.join('products', str(random_timestamp))
+    _, extension = os.path.splitext(filename)
+    return os.path.join('products', f'{str(random_timestamp)}{extension}')
 
 
 class Category(models.Model):
