@@ -12,6 +12,7 @@ from apps.product.services import ProductFilter, ProductPagination
 
 
 class ProductRetrieveAPiView(generics.RetrieveAPIView):
+    permission_classes = (AllowAny, )
     serializer_class = ProductSerializer
     renderer_classes = (ProductJSONRenderer,)
     queryset = Product.objects.all()
@@ -52,10 +53,11 @@ class ProductsAPIView(generics.GenericAPIView):
 
 class CategoriesAPIView(generics.GenericAPIView):
     serializer_class = CategorySerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (AllowAny, )
     renderer_classes = (CategoryJSONRenderer,)
 
     def post(self, request):
+        self.check_permissions(request)
         category = request.data.get('category', {})
         serializer = self.serializer_class(data=category)
         serializer.is_valid(raise_exception=True)
@@ -70,3 +72,11 @@ class CategoriesAPIView(generics.GenericAPIView):
     def get_queryset(self):
         q = Category.objects.all().order_by('-id')
         return q
+
+    
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            permission_classes = [IsAdminUser]
+        else:
+            permission_classes = []
+        return [permission() for permission in permission_classes]
