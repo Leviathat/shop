@@ -5,9 +5,9 @@ services:
     image: postgres:13-alpine
     env_file: ./backend/.env
     environment:
-      - POSTGRES_DB=db
-      - POSTGRES_USER=admi
-      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=shop_db
+      - POSTGRES_USER=shop_admin
+      - POSTGRES_PASSWORD=488719
     volumes:
       - postgres-data:/var/lib/postgresql/data/
     ports:
