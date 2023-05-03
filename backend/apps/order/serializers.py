@@ -11,10 +11,12 @@ class OrderProductSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
+    status_display = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
-        fields = ('id', 'customer', 'status', 'created_at', 'updated_at', 'products', 'total_amount')
+        fields = ('id', 'customer', 'status', 'created_at', 'updated_at', 'products', 'total_amount', 'status_display')
+
 
     def get_products(self, order):
         order_products = OrderProduct.objects.filter(order=order).select_related('product')
@@ -31,7 +33,7 @@ class NewOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'status', 'status_display', 'created_at', 'products', 'total_amount', 'customer', )
-        read_only_fields = ('id', 'created_at', 'status_display', 'status', )
+        read_only_fields = ('id', 'created_at', 'status_display', 'status', 'total_amount', )
 
     def validate_products(self, products):
         if not products:
@@ -43,14 +45,19 @@ class NewOrderSerializer(serializers.ModelSerializer):
         order = Order.objects.create(**validated_data)
 
         for product_data in products_data:
+            product = Product.objects.get(id=product_data['product'].pk)
+            quantity = product_data['quantity']                            
             OrderProduct.objects.create(
                 order=order,
-                product=Product.objects.get(id=product_data['product'].pk),
-                quantity=product_data['quantity']
+                product=product,
+                quantity=quantity
             )
 
         return order
 
+    def get_total_amount(self, obj):
+        return obj.total_amount
+    
     def get_status_display(self, obj):
         return dict(Order.STATUS_CHOICES)[obj.status]
 

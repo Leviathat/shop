@@ -2,10 +2,11 @@
 <template>
     <div class="mt-20">
         <div v-if="product.id" class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
-            <div class="w-full md:w-1/2 aspect-square flex flex-col justify-center">
-                <div v-if="product.images[0]" class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
-                    <img :src="product.images[0].image" alt="Abstract Design"
-                        class="h-full w-full object-cover drop-shadow-2xl" />
+            <div class="flex overflow-hidden" v-for="image in product.images" :key="image.id">
+                <div class="w-full md:w-1/2 aspect-square flex flex-col justify-center">
+                    <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
+                        <img :src="image.image" alt="Abstract Design" class="h-full w-full object-cover drop-shadow-2xl" />
+                    </div>
                 </div>
             </div>
             <div class="w-full bg-zinc-800 md:w-1/2 sm:aspect-square py-5 sm:py-0 flex flex-col justify-center">
@@ -75,9 +76,9 @@
                             </div>
 
                             <div class="flex flex-row">
-                                <span class="text-blue-600 text-xl md:text-2xl font-semibold">₸ {{ product.price
-                                    / 1
-                                }}</span>
+                                <span class="text-blue-600 text-xl md:text-2xl font-semibold">
+                                    ₸ {{ product.price / 1 }}
+                                </span>
 
                                 <span class="text-zinc-500 ml-2 text-lg md:text-xl font-semibold line-through align-top">₸
                                     {{ product.price / 1 }}</span>

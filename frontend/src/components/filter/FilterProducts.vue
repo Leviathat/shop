@@ -1,6 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <div class="w-screen bg-zinc-100 relative">
+    <div class="bg-zinc-100 relative">
         <div @click="showCategories" class="sm:hidden w-full flex justify-center py-2 cursor-pointer">
             <span class="mx-2 inline-block align-top font-sans font-semibold">Фильтры</span>
         </div>

@@ -6,18 +6,24 @@ from apps.authentication.models import User
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     STATUS_CHOICES = [
-        (1, 'Draft'),
-        (2, 'Paid'),
-        (3, 'Shipped'),
-        (4, 'Delivered'),
-        (5, 'Cancelled'),
+        (1, 'Оформлен'),
+        (2, 'Оплачен'),
+        (3, 'В пути'),
+        (4, 'Доставлен'),
+        (5, 'Отменен'),
     ]
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     products = models.ManyToManyField(Product, through='OrderProduct')
-    total_amount = models.DecimalField(max_digits=8, decimal_places=2)
+    
 
+    @property
+    def total_amount(self):
+        order_products = OrderProduct.objects.filter(order=self)
+        total = sum(op.product.price * op.quantity for op in order_products)
+        return total
+    
     def __str__(self):
         return f'Order #{self.pk}'
 

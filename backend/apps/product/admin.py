@@ -1,16 +1,16 @@
 from django.contrib import admin
 from .models import Product, Category, ProductImage
 
-class ProductAdmin(admin.ModelAdmin):
-    pass
 
 class CategoryAdmin(admin.ModelAdmin):
     pass
 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
 
-class ProductImageAdmin(admin.ModelAdmin):
-    pass
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ProductImageInline]
 
-admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(ProductImage, ProductImageAdmin)
