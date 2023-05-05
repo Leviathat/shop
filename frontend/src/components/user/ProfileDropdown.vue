@@ -18,6 +18,13 @@
             </div>
             <ul class="py-2" aria-labelledby="user-menu-button">
                 <li>
+                    <router-link to="/order/">
+                        <span class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-300 duration-200">
+                            Заказы
+                        </span>
+                    </router-link>
+                </li>
+                <li>
                     <router-link to="/">
                         <span class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-300 duration-200">
                             Настройки

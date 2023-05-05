@@ -2,12 +2,20 @@
 <template>
     <div class="mt-20">
         <div v-if="product.id" class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
-            <div class="flex overflow-hidden" v-for="image in product.images" :key="image.id">
-                <div class="w-full md:w-1/2 aspect-square flex flex-col justify-center">
-                    <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
-                        <img :src="image.image" alt="Abstract Design" class="h-full w-full object-cover drop-shadow-2xl" />
+            <div class="w-full md:w-1/2 aspect-square flex flex-col justify-center">
+                <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center relative">
+                    <div class="w-8 sm:w-14 absolute h-full z-50 left-0" @click="prevIndex"></div>
+                    <div class="w-8 sm:w-14 absolute h-full z-50 right-0" @click="nextIndex"></div>
+                    <img :src="product.images[currentImageIndex].image" alt="Abstract Design"
+                        class="h-full w-full object-cover drop-shadow-2xl" />
+                    <div class="flex flex-row justify-center py-2">
+                        <button class="h-1 w-14 mx-1" v-for="(images, index) in product.images"
+                            :class="{ 'bg-zinc-900': index === currentImageIndex, 'bg-zinc-500': index !== currentImageIndex }"
+                            :key="index" @click="setCurrentIndex(index)">
+                        </button>
                     </div>
                 </div>
+
             </div>
             <div class="w-full bg-zinc-800 md:w-1/2 sm:aspect-square py-5 sm:py-0 flex flex-col justify-center">
                 <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
@@ -76,9 +84,9 @@
                             </div>
 
                             <div class="flex flex-row">
-                                <span class="text-blue-600 text-xl md:text-2xl font-semibold">
-                                    ₸ {{ product.price / 1 }}
-                                </span>
+                                <span class="text-blue-600 text-xl md:text-2xl font-semibold">₸ {{ product.price
+                                    / 1
+                                }}</span>
 
                                 <span class="text-zinc-500 ml-2 text-lg md:text-xl font-semibold line-through align-top">₸
                                     {{ product.price / 1 }}</span>
@@ -97,21 +105,9 @@
                                 {{ product.description }}</p>
                             <div class="flex flex-row max-w-1/3 mt-1 md:mt-10">
                                 <p>
-                                    <span
+                                    <span v-for="category in product.categories" :key="category.name"
                                         class="text-xs md:text-base font-semibold mr-2 p-1 border-b-2 border-yellow-200 font-sans text-zinc-200">
-                                        Category
-                                    </span>
-                                    <span
-                                        class="text-xs md:text-base font-semibold mr-2 p-1 border-b-2 border-yellow-200 font-sans text-zinc-200">
-                                        Category
-                                    </span>
-                                    <span
-                                        class="text-xs md:text-base font-semibold mr-2 p-1 border-b-2 border-yellow-200 font-sans text-zinc-200">
-                                        Category
-                                    </span>
-                                    <span
-                                        class="text-xs md:text-base font-semibold mr-2 p-1 border-b-2 border-yellow-200 font-sans text-zinc-200">
-                                        Category
+                                        {{ category.name }}
                                     </span>
                                 </p>
                             </div>
@@ -197,17 +193,40 @@ export default {
     data() {
         return {
             showLess: true,
+            currentImageIndex: 0,
         }
     },
     computed: {
         excerpt() {
             return this.product.description.slice(0, 100);
-        }
+        },
+        imagesArrayLength() {
+            return this.product.images.length - 1
+        },
     },
     methods: {
         showMore() {
             this.showLess = !this.showLess;
-        }
+        },
+        setCurrentIndex(index) {
+            this.currentImageIndex = index;
+        },
+        nextIndex() {
+            if (this.currentImageIndex < this.imagesArrayLength) {
+                this.currentImageIndex++;
+            }
+            else {
+                this.currentImageIndex = 0
+            }
+        },
+        prevIndex() {
+            if (this.currentImageIndex > 0) {
+                this.currentImageIndex--;
+            }
+            else {
+                this.currentImageIndex = this.imagesArrayLength
+            }
+        },
     }
 };
 </script>

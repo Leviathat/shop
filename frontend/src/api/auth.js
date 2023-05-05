@@ -20,9 +20,10 @@ export const loginUser = async (user) => {
   try {
     const response = await axiosInstance.post("/users/login/", user);
     setToken(response.data.user.token);
-    return response.data.user;
+    return response;
   } catch (error) {
     console.log(error);
+    return 400
   }
 };
 

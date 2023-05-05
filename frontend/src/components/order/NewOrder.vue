@@ -1,22 +1,33 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <!-- MAKING ORDER-->
+    <div class="sm:w-1/3 mx-auto p-5 bg-zinc-100">
+        <div class="flex w-full justify-between">
+            <span class="font-semibold text-xl">Сумма</span>
+            <span class="font-semibold text-xl">₸ {{ total_amount }}</span>
+        </div>
+        <div class="flex w-full justify-between">
+            <span class="font-semibold text-xl">Доставка</span>
+            <span class="font-semibold text-xl">₸ {{ shipping / 1 }}</span>
+        </div>
+    </div>
+    <!-- ORDER SUBMIT -->
     <div class="sm:w-1/3 mx-auto p-5 bg-zinc-100">
         <form class="font-semibold flex flex-col justify-center" @submit.prevent="makeOrder">
             <button type="submit"
-                class="text-white duration-300 bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Оформить заказ
+                class="duration-300 bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 w-full sm:w-auto px-5 py-2.5"
+                :disabled="!user">
+                <span class="text-white text-center font-medium ">
+                    Оформить заказ
+                </span>
             </button>
         </form>
     </div>
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script>
-import router from "@/router";
-
 export default {
     name: "NewOrder",
-    props: ['cart'],
+    props: ['cart', 'user'],
     computed: {
         total_amount: {
             get() {
@@ -24,6 +35,9 @@ export default {
                     return total + (parseFloat(product.price) * product.quantity);
                 }, 0);
             }
+        },
+        shipping() {
+            return this.total_amount * 5 / 100
         },
         products: {
             get() {
@@ -38,15 +52,9 @@ export default {
                 this.$store.commit("SET_ORDER", value)
             }
         },
-        is_auth() {
-            return this.$store.getters.getUser ? true : false
-        }
     },
     methods: {
         async makeOrder() {
-            if (!this.is_auth) {
-                router.push("/login");
-            }
             const orderObj = {
                 "total_amount": this.total_amount,
                 "products": this.products

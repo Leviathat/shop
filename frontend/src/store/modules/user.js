@@ -17,23 +17,27 @@ export default {
     },
   },
   actions: {
-    async register({ commit }, newUser) {
-      try {
-        const response = await registerUser(newUser);
-        commit("SET_USER", response);
-        router.push("/login");
-      } catch (error) {
-        console.log(error);
-      }
+    async register({ commit, dispatch }, newUser) {
+      const response = await registerUser(newUser);
+      commit("SET_USER", response);
+      console.log(response);
+      dispatch("addAlert", { message: "Ошибка при регистрации", type: 4 });
     },
-    async login({ commit }, userData) {
-      try {
-        const response = await loginUser(userData);
-        commit("SET_USER", response);
-        router.push("/");
-      } catch (error) {
-        console.log(error);
+    async login({ commit, dispatch }, userData) {
+      const response = await loginUser(userData);
+      commit("SET_USER", response);
+      const payload = {}
+      
+      if (response.status) {
+        payload.message = "Вы успешно авторизовались"
+        payload.type = 2
+        router.push("/")
       }
+      else {
+        payload.message = "Ошибка при авторизации"
+        payload.type = 4 
+      }
+      dispatch("addAlert", payload);
     },
     async info({ commit }) {
       try {
