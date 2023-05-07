@@ -2,21 +2,19 @@
 <template>
     <div class="mt-20">
         <div v-if="product.id" class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
-            <div class="w-full md:w-1/2 aspect-square flex flex-col justify-center">
-                <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center relative">
-                    <div class="w-8 sm:w-14 absolute h-full z-50 left-0" @click="prevIndex"></div>
-                    <div class="w-8 sm:w-14 absolute h-full z-50 right-0" @click="nextIndex"></div>
-                    <img :src="product.images[currentImageIndex].image" alt="Abstract Design"
-                        class="h-full w-full object-cover drop-shadow-2xl" />
-                    <div class="flex flex-row justify-center py-2">
-                        <button class="h-1 w-14 mx-1" v-for="(images, index) in product.images"
-                            :class="{ 'bg-zinc-900': index === currentImageIndex, 'bg-zinc-500': index !== currentImageIndex }"
-                            :key="index" @click="setCurrentIndex(index)">
-                        </button>
-                    </div>
+            <div class="w-full sm:w-1/2 aspect-square justify-self-center relative p-5 sm:p-10">
+                <div class="w-8 sm:w-14 absolute h-full z-50 left-0 top-0" @click="prevIndex"></div>
+                <div class="w-8 sm:w-14 absolute h-full z-50 right-0 top-0" @click="nextIndex"></div>
+                <img :src="product.images[currentImageIndex].image" alt="Abstract Design"
+                    class="h-full w-full object-cover drop-shadow-2xl" />
+                <div class="absolute flex justify-center w-full left-0 py-2 sm:py-4">
+                    <button class="h-1 w-14 mx-1" v-for="(images, index) in product.images"
+                        :class="{ 'bg-zinc-900': index === currentImageIndex, 'bg-zinc-500': index !== currentImageIndex }"
+                        :key="index" @click="setCurrentIndex(index)">
+                    </button>
                 </div>
-
             </div>
+
             <div class="w-full bg-zinc-800 md:w-1/2 sm:aspect-square py-5 sm:py-0 flex flex-col justify-center">
                 <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
                     <div class="h-full flex flex-col justify-between">
