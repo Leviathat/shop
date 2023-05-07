@@ -6,10 +6,8 @@
             <div class="bg-zinc-200 w-full rounded-xl drop-shadow-sm hover:drop-shadow-2xl duration-200 overflow-hidden max-w-xs order-first lg:order-none m-auto"
                 v-for="obj in products" :key="obj.id">
                 <router-link :to="'/product/' + obj.id">
-                    <div v-if="obj.images.length !== 0" class="w-full h-2/3 cursor-pointer">
-                        <img :src="'http://127.0.0.1:8000' + obj.images[0].image" alt="Abstract Design"
-                            class=" w-full h-full object-cover aspect-square" />
-                    </div>
+                    <img :src="obj.images[0].image" alt="Abstract Design"
+                        class=" w-full h-full object-cover aspect-square" />
                     <div class="py-4 px-4 pt-1 max-h-1/3 ">
                         <div class="w-full flex flex-row justify-between">
                             <div class="flex flex-row">
