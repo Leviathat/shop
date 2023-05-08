@@ -20,8 +20,18 @@ export default {
     async register({ commit, dispatch }, newUser) {
       const response = await registerUser(newUser);
       commit("SET_USER", response);
-      console.log(response);
-      dispatch("addAlert", { message: "Ошибка при регистрации", type: 4 });
+      const payload = {}
+      
+      if (response.status) {
+        payload.message = "Вы успешно авторизовались"
+        payload.type = 2
+        router.push("/")
+      }
+      else {
+        payload.message = "Ошибка при авторизации"
+        payload.type = 4 
+      }
+      dispatch("addAlert", payload);
     },
     async login({ commit, dispatch }, userData) {
       const response = await loginUser(userData);

@@ -1,7 +1,7 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-  <div class="fixed z-50 sm:right-5 right-8 top-10">
-    <div v-for="(alert, index) in alerts" :key="index" :id="'alert-' + alert.id" class="py-2 px-4 rounded-md mb-4">
+  <div class="fixed w-full z-50 flex flex-col items-center top-10">
+    <div v-for="(alert, index) in alerts" :key="index" :id="'alert-' + alert.id" class="py-2 px-4 rounded-md">
       <alert-item :type="alert.type" :message="alert.message" :id="alert.id" />
     </div>
   </div>

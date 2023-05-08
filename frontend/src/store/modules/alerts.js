@@ -21,7 +21,7 @@ export default {
   actions: {
     async addAlert({ commit }, { message, type }) {
       const id = Math.random().toString(36);
-      const duration = 2500; 
+      const duration = 1300; 
       const alert = { id, message, type, duration };
       commit("ADD_ALERT", alert);
       setTimeout(() => {

@@ -7,7 +7,7 @@
                 v-for="obj in products" :key="obj.id">
                 <router-link :to="'/product/' + obj.id">
                     <div v-if="obj.images.length !== 0" class="w-full h-2/3 cursor-pointer">
-                        <img :src="'http://127.0.0.1:8000' + obj.images[0].image" alt="Abstract Design"
+                        <img :src="obj.images[0].image" alt="Abstract Design"
                             class=" w-full h-full object-cover aspect-square" />
                     </div>
                     <div class="py-4 px-4 pt-1 max-h-1/3 ">

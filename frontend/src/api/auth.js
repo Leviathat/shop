@@ -10,9 +10,9 @@ export const registerUser = async (user) => {
     const response = await axiosInstance.post("/users/register/", data);
     router.push("/login");
     setToken(response.data.user.token);
-    return response.data.user;
+    return response;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error);
   }
 };
 

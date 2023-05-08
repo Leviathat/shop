@@ -9,6 +9,7 @@
             , чтобы оформить заказ
         </span>
     </div>
+
     <div class="mt-5" v-if="cart.length != 0" :class="{ 'blur-xl': !user }">
         <!-- CART ITSELF-->
         <div class="sm:w-1/3 mx-auto p-5 bg-zinc-100">
@@ -18,8 +19,8 @@
                 <div class="w-full flex pr-2">
                     <div class="w-full flex flex-row justify-between">
                         <div class="font-semibold flex  w-full">
-                            <img :src="product.image" alt="Abstract Design"
-                                class="w-20 object-cover aspect-square drop-shadow-2xl rounded-md" />
+                            <img :src="product.image.includes('http://127.0.0.1:8000') ? product.image : 'http://127.0.0.1:8000' + product.image"
+                                alt="Abstract Design" class="w-20 object-cover aspect-square drop-shadow-2xl rounded-md" />
                             <div class="flex flex-col px-4 justify-between w-full">
                                 <div class="flex flex-col">
                                     <div class="inline-flex space-x-2">

@@ -6,7 +6,6 @@
         class="flex items-center duration-200 border-b-2 border-black md:border-transparent  hover:border-black">
         <span class="self-center text-2xl align-top text-zinc-900 font-semibold whitespace-nowrap">sswtsk</span>
       </router-link>
-
       <div class="flex items-center md:order-2 relative">
         <profile-dropdown />
         <button type="button" @click="navbar_show"
@@ -20,7 +19,6 @@
           </svg>
         </button>
       </div>
-
       <div class="items-center justify-between w-full md:flex md:w-auto md:order-1" id="mobile-menu-2"
         :class="{ hidden: navbar_hidden }">
         <ul
@@ -31,12 +29,12 @@
             </router-link>
           </li>
           <li class="py-2 pl-3 pr-4">
-            <router-link to="/about" class="duration-200 border-b-2 border-transparent hover:border-black">
+            <router-link to="/contact" class="duration-200 border-b-2 border-transparent hover:border-black">
               О нас
             </router-link>
           </li>
           <li class="py-2 pl-3 pr-4">
-            <router-link to="/about" class="duration-200 border-b-2 border-transparent hover:border-black">
+            <router-link to="/contact" class="duration-200 border-b-2 border-transparent hover:border-black">
               Главная
             </router-link>
           </li>
