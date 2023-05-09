@@ -10,7 +10,8 @@
                 <div class="flex flex-row h-full duration-500"
                     :style="{ transform: `translateX(-${currentImageIndex * 100}%)` }">
                     <div v-for="(image, index) in product.images" :key="image" class="relative h-full w-full aspect-square">
-                        <img :src="image.image" alt="Abstract Design" :class="{ 'opacity-0': index !== currentImageIndex }"
+                        <img :src="image.image.replace('http://', 'https://')" alt="Abstract Design"
+                            :class="{ 'opacity-0': index !== currentImageIndex }"
                             class="duration-500 h-full w-full object-cover drop-shadow-2xl absolute" />
                     </div>
                 </div>
