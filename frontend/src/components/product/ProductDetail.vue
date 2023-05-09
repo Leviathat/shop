@@ -1,7 +1,8 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <div class="mt-20">
-        <div v-if="product.id" class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
+    <div class="mt-20" v-if="product.id">
+
+        <div class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
             <div class="w-full sm:w-1/2 aspect-square justify-self-center relative p-5 sm:p-10">
                 <div class="w-1/3 absolute h-full z-30 left-0 top-0" @click="prevIndex"></div>
                 <div class="w-1/3 absolute h-full z-30 right-0 top-0" @click="nextIndex"></div>
@@ -25,6 +26,7 @@
                 <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
                     <div class="h-full flex flex-col justify-between">
                         <div class="flex flex-col">
+
                             <div class="flex justify-between">
 
                                 <p class="text-zinc-100 text-xl md:text-2xl font-bold capitalize">
@@ -85,8 +87,10 @@
                                         </svg>
                                     </div>
                                 </div>
+
                             </div>
 
+                            <!-- PRICE -->
                             <div class="flex flex-row">
                                 <span class="text-blue-600 text-xl md:text-2xl font-semibold">₸ {{ product.price
                                     / 1
@@ -96,29 +100,53 @@
                                     {{ product.price / 1 }}</span>
 
                             </div>
-                            <p class="sm:hidden text-zinc-100 text-base md:text-xl font-semibold capitalize mt-1 md:mt-5">
-                                <span v-if="showLess" @click="showMore" class="text-zinc-400">
-                                    {{ excerpt }}...
-                                </span>
-                                <span v-else @click="showMore">
-                                    {{ product.description }}
-                                </span>
-                            </p>
-                            <p
-                                class="hidden sm:block text-zinc-100 text-base md:text-xl font-semibold capitalize mt-1 md:mt-5">
-                                {{ product.description }}</p>
-                            <div class="flex flex-row max-w-1/3 mt-1 md:mt-10">
-                                <p>
+
+                            <!-- CATEGORIES -->
+                            <div class="max-w-1/3 mt-1 md:mt-4 flex flex-row">
+                                <p class="text-base md:text-xl font-semibold">
+                                    <span class="text-zinc-100 mr-2">Категории:
+                                    </span>
                                     <span v-for="category in product.categories" :key="category.name"
-                                        class="text-xs md:text-base font-semibold mr-2 p-1 border-b-2 border-yellow-200 font-sans text-zinc-200">
+                                        class="text-zinc-200 border-b-2 py-1 border-zinc-200">
                                         {{ category.name }}
                                     </span>
                                 </p>
+                            </div>
+
+                            <!-- SIZES -->
+                            <div class="flex flex-col mt-1">
+                                <span class="text-base md:text-xl font-semibold text-zinc-100">Размеры: </span>
+                                <div class="flex flex-row">
+                                    <p>
+                                        <span v-for="size in product.sizes" :key="size.name"
+                                            class="text-sm md:text-base font-semibold mr-2 p-1 border-b-2 border-yellow-200 font-sans text-zinc-200">
+                                            {{ size.name }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- DESCRIPTION-->
+                            <div class="flex flex-col">
+
+                                <p
+                                    class="sm:hidden text-zinc-100 text-base md:text-xl font-semibold capitalize mt-1 md:mt-5">
+                                    <span v-if="showLess" @click="showMore" class="text-zinc-400">
+                                        {{ excerpt }}...
+                                    </span>
+                                    <span v-else @click="showMore">
+                                        {{ product.description }}
+                                    </span>
+                                </p>
+                                <p
+                                    class="hidden sm:block text-zinc-100 text-base md:text-xl font-semibold capitalize mt-1 md:mt-5">
+                                    {{ product.description }}</p>
                             </div>
                         </div>
                         <div class="flex flex-col mt-5">
                             <div class="flex w-full">
                                 <button type="button" @click.prevent="this.$parent.addToCart(product)"
+                                    :disabled="!product.in_stock"
                                     class="text-zinc-100 w-5/6 md:w-1/2 mx-auto hover:bg-zinc-100 bg-zinc-900 duration-300 hover:text-zinc-900 focus:outline-none font-semibold font-sans px-5 py-2">
                                     <span class=" text-center inline-flex items-center align-bottom">
                                         <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor"
@@ -183,6 +211,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div v-if="!product.in_stock"
+            class="mt-5 w-3/4 md:w-1/3 mx-auto bg-rose-500 flex flex-col justify-center items-center py-4">
+            <span class="font-semibold font-sans text-zinc-100">
+                Распродан
+            </span>
         </div>
     </div>
 </template>

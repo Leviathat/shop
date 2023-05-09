@@ -38,7 +38,7 @@ export default {
     },
     async created() {
         await this.$store.dispatch("orderList");
-        this.$store.dispatch("Loaded");
+        this.$store.dispatch("Loaded", true);
     },
 };
 </script>

@@ -27,5 +27,8 @@ export default {
         HeaderContact,
         FooterComponent,
     },
+    mounted() {
+        this.$store.dispatch("Loaded", true);
+    },
 };
 </script>

@@ -31,5 +31,8 @@ export default {
     BaseNavbar,
     FooterComponent,
   },
+  mounted() {
+    this.$store.dispatch("Loaded", true);
+  },
 };
 </script>

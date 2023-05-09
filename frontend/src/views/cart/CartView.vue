@@ -20,7 +20,7 @@ export default {
         CartProducts,
     },
     mounted() {
-        this.$store.dispatch("Loaded");
+        this.$store.dispatch("Loaded", true);
     },
 };
 </script>

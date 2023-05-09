@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = '/api/';
+const API_URL = 'https://notrated.duckdns.org/api/';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
