@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from django.db import IntegrityError
-from apps.product.models import Product, ProductImage, Category
+from apps.product.models import Product, ProductSize, ProductImage, Category
+
+
+class ProductSizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductSize
+        fields = ('id', 'name')
+        read_only_fields = ('id', )
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -28,6 +35,7 @@ class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
     categories = CategorySerializer(many=True, read_only=True)
     categories_data = serializers.CharField(write_only=True)
+    sizes = ProductSizeSerializer(many=True, read_only=True)
 
     uploaded_images = serializers.ListField(
         child=serializers.ImageField(max_length=1000000,
@@ -37,8 +45,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'description', 'price', 'images', 'uploaded_images', 'categories', 'categories_data',
-                  'rating')
+        fields = ('id', 'name', 'in_stock', 'description', 'price', 'images', 'uploaded_images', 'categories', 'categories_data',
+                  'rating', 'sizes')
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop("uploaded_images")
