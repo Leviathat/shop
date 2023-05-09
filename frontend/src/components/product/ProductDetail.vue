@@ -3,10 +3,17 @@
     <div class="mt-20">
         <div v-if="product.id" class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
             <div class="w-full sm:w-1/2 aspect-square justify-self-center relative p-5 sm:p-10">
-                <div class="w-1/3 absolute h-full z-50 left-0 top-0" @click="prevIndex"></div>
-                <div class="w-1/3 absolute h-full z-50 right-0 top-0" @click="nextIndex"></div>
-                <img :src="product.images[currentImageIndex].image" alt="Abstract Design"
-                    class="h-full w-full object-cover drop-shadow-2xl" />
+                <div class="w-1/3 absolute h-full z-30 left-0 top-0" @click="prevIndex"></div>
+                <div class="w-1/3 absolute h-full z-30 right-0 top-0" @click="nextIndex"></div>
+
+                <div class="flex flex-row h-full duration-500"
+                    :style="{ transform: `translateX(-${currentImageIndex * 100}%)` }">
+                    <div v-for="(image, index) in product.images" :key="image" class="relative h-full w-full aspect-square">
+                        <img :src="image.image" alt="Abstract Design" :class="{ 'opacity-0': index !== currentImageIndex }"
+                            class="duration-500 h-full w-full object-cover drop-shadow-2xl absolute" />
+                    </div>
+                </div>
+
                 <div class="absolute flex justify-center w-full left-0 py-2 sm:py-4">
                     <button class="h-1 w-14 mx-1" v-for="(images, index) in product.images"
                         :class="{ 'bg-zinc-900': index === currentImageIndex, 'bg-zinc-500': index !== currentImageIndex }"
@@ -227,3 +234,53 @@ export default {
     }
 };
 </script>
+<!-- eslint-disable prettier/prettier -->
+<style>
+.slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.slide-image {
+    width: 100%;
+    height: auto;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.prev-button,
+.next-button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.prev-button:disabled,
+.next-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>

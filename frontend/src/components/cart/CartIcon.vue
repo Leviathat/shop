@@ -2,7 +2,7 @@
 <template>
     <router-link to="/cart/">
         <div
-            class="z-50 fixed left-5 bg-zinc-50 rounded-full h-16 w-16 flex flex-col justify-center shadow-2xl shadow-indigo-800">
+            class="z-40 fixed left-5 bg-zinc-50 rounded-full h-16 w-16 flex flex-col justify-center shadow-2xl shadow-indigo-800">
             <div class="w-1/2 aspect-square mx-auto">
                 <cart-count />
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"

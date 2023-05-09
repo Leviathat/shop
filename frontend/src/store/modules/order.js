@@ -36,7 +36,6 @@ export default {
       try {
         const response = await getOrders();
         commit("SET_ORDER_LIST", response);
-        console.log(response);
       } catch (error) {
         console.log(error);
       }

@@ -38,6 +38,7 @@ export default {
     async created() {
         this.productId = this.$route.params.id;
         await this.$store.dispatch("fetchSingleProduct", this.productId);
+        this.$store.dispatch("Loaded", true);
     },
 };
 </script>

@@ -4,6 +4,7 @@ import product from "@/store/modules/product";
 import cart from "@/store/modules/cart";
 import order from "@/store/modules/order";
 import alerts from "@/store/modules/alerts";
+import base from "@/store/modules/base";
 
 export default new Vuex.Store({
   modules: {
@@ -12,5 +13,6 @@ export default new Vuex.Store({
     cart,
     order,
     alerts,
+    base,
   },
 });

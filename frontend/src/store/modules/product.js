@@ -24,7 +24,7 @@ export default {
   },
   getters: {
     getProductsList(state) {
-      return state.productData.results;
+      return state.productData;
     },
     getProduct(state) {
       return state.product;

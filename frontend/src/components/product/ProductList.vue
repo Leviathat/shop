@@ -4,10 +4,10 @@
         <div
             class="w-3/4 mx-auto grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-content-center">
             <div class="bg-zinc-200 w-full rounded-xl drop-shadow-sm hover:drop-shadow-2xl duration-200 overflow-hidden max-w-xs order-first lg:order-none m-auto"
-                v-for="obj in products" :key="obj.id">
+                v-for="obj in productsData.results" :key="obj.id">
                 <router-link :to="'/product/' + obj.id">
                     <div v-if="obj.images.length !== 0" class="w-full h-2/3 cursor-pointer">
-                        <img :src="obj.images[0].image" alt="Abstract Design"
+                        <img :src="'https://notrated.duckdns.org' + obj.images[0].image" alt="Abstract Design"
                             class=" w-full h-full object-cover aspect-square" />
                     </div>
                     <div class="py-4 px-4 pt-1 max-h-1/3 ">
@@ -96,18 +96,25 @@
             </div>
         </div>
     </div>
+    <product-pagination :count="productsData.count" :next_page="productsData.next_page"
+        :prev_page="productsData.prev_page" />
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script>
+import ProductPagination from './ProductPagination.vue';
+
 export default {
     name: "ProductList",
+    components: {
+        ProductPagination
+    },
     computed: {
         cart: {
             get() {
                 return this.$store.getters.getCartObject;
             },
         },
-        products: {
+        productsData: {
             get() {
                 return this.$store.getters.getProductsList;
             },
@@ -120,6 +127,7 @@ export default {
     },
     async created() {
         await this.$store.dispatch("fetchProducts");
+        this.$store.dispatch("Loaded", true);
     },
 };
 </script>

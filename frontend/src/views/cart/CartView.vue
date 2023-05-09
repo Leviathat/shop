@@ -1,6 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <div class="">
+    <div>
         <base-navbar />
         <cart-products />
     </div>
@@ -19,8 +19,8 @@ export default {
         FooterComponent,
         CartProducts,
     },
-    computed: {},
-    methods: {},
-    async created() { },
+    mounted() {
+        this.$store.dispatch("Loaded");
+    },
 };
 </script>

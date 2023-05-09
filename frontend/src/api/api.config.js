@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = 'http://127.0.0.1:8000/api/';
+const API_URL = '/api/';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -10,6 +10,7 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 
 axiosInstance.interceptors.request.use(
   (config) => {

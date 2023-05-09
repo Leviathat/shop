@@ -1,16 +1,16 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <div class="w-full flex flex-col cursor-pointer">
-        <div class="flex z-30 text-center">
+        <div class="flex z-30 text-center group">
             <div class="px-2">
                 <pre class="font-sans font-semibold"
                     :class="{ 'text-orange-500': order.status === 5, 'text-emerald-500': order.status === 4, }">{{ order.status_display }}</pre>
             </div>
-            <div class="w-full text-left px-2">
+            <div class="hidden group-hover:block w-full text-left px-2">
                 ₸ {{ order.total_amount }}
             </div>
             <div class="w-full text-right px-2">
-                {{ created_at }}
+                <pre class="font-sans font-semibold">{{ created_at }}</pre>
             </div>
             <order-cancel :id="order.id" v-show="order.status !== 5" />
         </div>
@@ -31,7 +31,7 @@ export default {
     computed: {
         created_at() {
             moment.locale("ru");
-            const dateString = "2023-05-03T14:55:48.452111Z";
+            const dateString = this.order.created_at;
             const result = moment(dateString).fromNow();
             return result;
         },

@@ -7,11 +7,11 @@
                 <div class="w-full text-center py-4">
                     <span class="text-xl font-semibold">Ваши заказы</span>
                 </div>
-                <div v-if="orders.length > 0" class="flex flex-col divide-y-2">
-                    <div v-for="order in orders" :key="order.id"
+                <div v-if="orders && orders.length > 0" class="flex flex-col divide-y-2">
+                    <router-link to="#" v-for="order in orders" :key="order.id"
                         class="flex py-5 hover:bg-zinc-900 hover:text-zinc-100 duration-200">
                         <order-item :order="order" />
-                    </div>
+                    </router-link>
                 </div>
                 <div v-else class="w-full text-center py-4">
                     <span class="font-semibold text-xl text-zinc-500">Список заказов пуст..</span>
