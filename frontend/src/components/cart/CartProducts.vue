@@ -19,7 +19,7 @@
                 <div class="w-full flex pr-2">
                     <div class="w-full flex flex-row justify-between">
                         <div class="font-semibold flex  w-full">
-                            <img :src="'https://notrated.duckdns.org' + product.image" alt="Abstract Design"
+                            <img :src="product.image" alt="Abstract Design"
                                 class="w-20 object-cover aspect-square drop-shadow-2xl rounded-md" />
                             <div class="flex flex-col px-4 justify-between w-full">
                                 <div class="flex flex-col">
