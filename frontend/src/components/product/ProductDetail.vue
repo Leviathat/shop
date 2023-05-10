@@ -15,7 +15,7 @@
                             class="duration-500 h-full w-full object-cover drop-shadow-2xl absolute" />
                     </div>
                 </div>
-                <div class="h-full w-full aspect-square">
+                <div v-else class="h-full w-full aspect-square">
                     <img src="/default.png" alt="Default image" class="h-full w-full object-cover">
                 </div>
 
