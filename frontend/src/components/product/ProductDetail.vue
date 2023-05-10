@@ -3,7 +3,7 @@
     <div class="mt-20" v-if="product.id">
 
         <div class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
-            <div class="w-full sm:w-1/2 aspect-square justify-self-center relative p-5 sm:p-10">
+            <div class="h-full w-full sm:w-1/2 aspect-square relative p-5 sm:p-10">
                 <div class="w-1/3 absolute h-full z-30 left-0 top-0" @click="prevIndex"></div>
                 <div class="w-1/3 absolute h-full z-30 right-0 top-0" @click="nextIndex"></div>
 
@@ -23,8 +23,8 @@
                     </button>
                 </div>
             </div>
-            <div class="w-full bg-zinc-800 md:w-1/2 sm:aspect-square py-5 sm:py-0 flex flex-col justify-center">
-                <div class="w-5/6 h-5/6 mx-auto aspect-square justify-self-center">
+            <div class="h-full w-full bg-zinc-800 md:w-1/2 sm:aspect-square p-5 sm:p-10">
+                <div class="w-full h-full mx-auto sm:aspect-square">
                     <div class="h-full flex flex-col justify-between">
                         <div class="flex flex-col">
 
@@ -108,7 +108,7 @@
                                     <span class="text-zinc-100 mr-2">Категории:
                                     </span>
                                     <span v-for="category in product.categories" :key="category.name"
-                                        class="text-zinc-200 border-b-2 py-1 border-zinc-200">
+                                        class="text-zinc-200 border-b-2 py-1 border-zinc-200 mr-2">
                                         {{ category.name }}
                                     </span>
                                 </p>
