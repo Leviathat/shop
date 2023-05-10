@@ -7,13 +7,16 @@
                 <div class="w-1/3 absolute h-full z-30 left-0 top-0" @click="prevIndex"></div>
                 <div class="w-1/3 absolute h-full z-30 right-0 top-0" @click="nextIndex"></div>
 
-                <div class="flex flex-row h-full duration-500"
+                <div class="flex flex-row h-full duration-500" v-if="product.images.length > 0"
                     :style="{ transform: `translateX(-${currentImageIndex * 100}%)` }">
                     <div v-for="(image, index) in product.images" :key="image" class="relative h-full w-full aspect-square">
                         <img :src="image.image.replace('http://', 'https://')" alt="Abstract Design"
                             :class="{ 'opacity-0': index !== currentImageIndex }"
                             class="duration-500 h-full w-full object-cover drop-shadow-2xl absolute" />
                     </div>
+                </div>
+                <div class="h-full w-full aspect-square">
+                    <img src="/default.png" alt="Default image" class="h-full w-full object-cover">
                 </div>
 
                 <div class="absolute flex justify-center w-full left-0 py-2 sm:py-4">

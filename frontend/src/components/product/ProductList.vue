@@ -8,7 +8,10 @@
                 <router-link :to="'/product/' + obj.id">
                     <div v-if="obj.images.length !== 0" class="w-full h-2/3 cursor-pointer">
                         <img :src="'https://notrated.duckdns.org' + obj.images[0].image" alt="Abstract Design"
-                            class=" w-full h-full object-cover aspect-square" />
+                            class="w-full h-full object-cover aspect-square" />
+                    </div>
+                    <div v-else class="w-full h-2/3 cursor-pointer">
+                        <img src="/default.png" alt="Default image" class="w-full h-full object-cover aspect-square">
                     </div>
                     <div class="py-4 px-4 pt-1 max-h-1/3 ">
                         <div class="w-full flex flex-row justify-between">
