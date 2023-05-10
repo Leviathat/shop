@@ -10,7 +10,7 @@
                         <img :src="'https://notrated.duckdns.org' + obj.images[0].image" alt="Abstract Design"
                             class="w-full h-full object-cover aspect-square" />
                     </div>
-                    <div v-else class="w-full h-2/3 cursor-pointer">
+                    <div v-else class="animate-pulse bg-zinc-200 w-full h-2/3 cursor-pointer">
                         <img src="/default.png" alt="Default image" class="w-full h-full object-cover aspect-square">
                     </div>
                     <div class="py-4 px-4 pt-1 max-h-1/3 ">
@@ -99,8 +99,7 @@
             </div>
         </div>
     </div>
-    <product-pagination :count="productsData.count" :next_page="productsData.next_page"
-        :prev_page="productsData.prev_page" />
+    <product-pagination :count="productsData.count" :next="productsData.next" :previous="productsData.previous" />
 </template>
 <!-- eslint-disable prettier/prettier -->
 <script>

@@ -4,9 +4,10 @@ import axiosInstance from "@/api/api.config";
 import Cookies from 'js-cookie';
 
 
-export const productList = async (filters, page) => {
+export const productList = async (filters, pageNumber) => {
   try {
-    const response = await axiosInstance.get("/products/", { params: { categories: filters, page: page } });
+    console.log(pageNumber)
+    const response = await axiosInstance.get("/products/", { params: { categories: filters, page: pageNumber } });
     return response.data;
   } catch (error) {
     console.log(error.response.data);

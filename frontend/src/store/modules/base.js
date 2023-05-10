@@ -15,5 +15,11 @@ export default {
     Loaded({ commit }, value) {
       commit("setLoaded", value);
     },
+    smoothScrool(){
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+    }
   },
 };

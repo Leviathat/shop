@@ -6,10 +6,11 @@ export default {
   state: {
     productData: {
       count: 0,
-      next_page: null,
-      prev_page: null,
+      next: null,
+      previous: null,
       results: [],
     },
+    currentPage: null,
     filter: [],
     categories: [],
     product: {
@@ -35,6 +36,9 @@ export default {
     getCategories(state) {
       return state.categories;
     },
+    getCurrentPage(state) {
+      return state.currentPage;
+    }
   },
   mutations: {
     SET_PRODUCT_DATA(state, productData) {
@@ -51,12 +55,16 @@ export default {
     },
     SET_CATEGORIES(state, categories) {
       state.categories = categories;
+    },
+    SET_CURRENT_PAGE(state, currentPage) {
+      state.currentPage = currentPage;
     }
   },
   actions: {
-    async fetchProducts({ commit, state }) {
+    async fetchProducts({ commit, state }, pageNumber) {
       try {
-        const response = await productList(state.filter.join(", "));
+        const response = await productList(state.filter.join(", "), pageNumber);
+        console.log(response)
         commit("SET_PRODUCT_DATA", response.product);
       } catch (error) {
         console.log(error);
