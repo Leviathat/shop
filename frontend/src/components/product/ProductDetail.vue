@@ -11,9 +11,9 @@
                     :style="{ transform: `translateX(-${currentImageIndex * 100}%)` }">
                     <div v-for="(image, index) in product.images" :key="image"
                         class="drop-shadow-2xl h-full w-full aspect-square">
-                        <img :src="image.image.replace('http://', 'https://')" alt="Abstract Design"
+                        <img :src="image.image" alt="Abstract Design"
                             :class="{ 'opacity-0 z-0': index !== currentImageIndex }"
-                            class="duration-500 h-full w-full aspect-square object-cover" />
+                            class="duration-500 h-full w-full object-cover" />
                     </div>
                 </div>
                 <div v-else class="h-full w-full aspect-square">
@@ -164,7 +164,7 @@
                                     </span>
                                 </button>
                             </div>
-                            <div class="hidden w-full sm:justify-between md:flex mt-5">
+                            <div class="hidden w-full justify-between sm:flex mt-5">
                                 <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023
                                     <router-link to="/" class="hover:underline">
                                         SSWTSK
