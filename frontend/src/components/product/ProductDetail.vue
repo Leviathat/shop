@@ -2,22 +2,22 @@
 <template>
     <div class="mt-20" v-if="product.id">
 
-        <div class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
-            <div class="h-full w-full md:w-1/2 aspect-square relative p-5 sm:p-10">
+        <div class="w-3/4 h-full bg-zinc-200 mx-auto flex flex-col md:flex-row">
+            <div class="h-full w-full sm:w-1/2  relative p-5 sm:p-10">
                 <div class="w-1/3 absolute h-full z-30 left-0 top-0" @click="prevIndex"></div>
                 <div class="w-1/3 absolute h-full z-30 right-0 top-0" @click="nextIndex"></div>
 
-                <div class="flex flex-row h-full duration-500" v-if="product.images.length > 0"
-                    :style="{ transform: `translateX(-${currentImageIndex * 100}%)` }">
+                <div class="flex flex-row h-full relative" v-if="product.images.length > 0">
                     <div v-for="(image, index) in product.images" :key="image"
-                        class="drop-shadow-2xl h-full w-full aspect-square">
-                        <img :src="image.image" alt="Abstract Design"
-                            :class="{ 'opacity-0 z-0': index !== currentImageIndex }"
-                            class="duration-500 h-full w-full object-cover" />
+                        class="w-full h-full duration-500 drop-shadow-2xl"
+                        :class="{ '-translate-x-full opacity-0 absolute': index !== currentImageIndex }">
+                        <img :src="image.image.replace('http://', 'https://')" alt="Abstract Design"
+                            class="h-full w-full object-cover" />
                     </div>
                 </div>
-                <div v-else class="h-full w-full aspect-square">
-                    <img src="/default.png" alt="Default image" class="h-full w-full object-cover">
+                <div v-else class="h-full w-full">
+                    <img src="https://notrated.duckdns.org/default.png" alt="Default image"
+                        class="h-full w-full object-cover">
                 </div>
 
                 <div class="absolute flex justify-center w-full left-0 py-2 sm:py-4">
@@ -27,8 +27,8 @@
                     </button>
                 </div>
             </div>
-            <div class="z-10 h-full w-full bg-zinc-800 md:w-1/2 sm:aspect-square p-5 sm:p-10">
-                <div class="w-full h-full mx-auto sm:aspect-square">
+            <div class="min-h-full w-full bg-zinc-800 md:w-1/2 sm: p-5 sm:p-10">
+                <div class="w-full h-full mx-auto sm:">
                     <div class="h-full flex flex-col justify-between">
                         <div class="flex flex-col">
 
@@ -164,7 +164,7 @@
                                     </span>
                                 </button>
                             </div>
-                            <div class="hidden w-full justify-between sm:flex mt-5">
+                            <div class="hidden w-full sm:justify-between md:flex mt-5">
                                 <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023
                                     <router-link to="/" class="hover:underline">
                                         SSWTSK
