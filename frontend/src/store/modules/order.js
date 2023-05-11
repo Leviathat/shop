@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { makeOrder, getOrders, patchCancelOrder } from "@/api/order";
+import router from "@/router";
 
 export default {
   state: {
@@ -7,6 +8,7 @@ export default {
       products: null,
     },
     orderList: null,
+    total_amount: 0,
   },
   getters: {
     getOrder(state) {
@@ -14,6 +16,9 @@ export default {
     },
     getOrderList(state) {
       return state.orderList;
+    },
+    getTotal(state) {
+      return state.total_amount;
     },
   },
   mutations: {
@@ -30,35 +35,59 @@ export default {
         order.status_display = "Отменен";
       }
     },
+    SET_TOTAL_AMOUNT(state, total) {
+      state.total_amount = total;
+    },
   },
   actions: {
     async orderList({ commit }) {
-      try {
-        const response = await getOrders();
-        commit("SET_ORDER_LIST", response);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await getOrders();
+      commit("SET_ORDER_LIST", response);
     },
-    async postOrder({ state }) {
-      try {
-        const data = {
-          order: state.order,
-        };
-        const response = await makeOrder(data);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
+
+    async postOrder({ state, dispatch, commit }) {
+      const payload = {};
+      const data = {
+        order: state.order,
+      };
+      const response = await makeOrder(data);
+      if (response) {
+        payload.message = "Заказ успешно оформлен";
+        payload.type = 1;
+        router.push("/");
+        commit("CLEAR_CART");
+      } else {
+        payload.message = "Ошибка при оформлении заказа";
+        payload.type = 4;
       }
+      dispatch("addAlert", payload);
     },
-    async cancelOrder({ commit }, id) {
+
+    async cancelOrder({ commit, dispatch }, id) {
+      const payload = {};
+      const data = {
+        order_id: id,
+      };
+      const order = await patchCancelOrder(data);
+      commit("SET_CANCELLED_ORDER", order.id);
+      if (order) {
+        payload.message = "Заказ отменен";
+        payload.type = 3;
+        router.push("/");
+      } else {
+        payload.message = "Ошибка при отмене заказа";
+        payload.type = 4;
+      }
+      dispatch("addAlert", payload);
+    },
+
+    async loadTotal({ commit, state }) {
+      const cart = await state.cart;
       try {
-        const data = {
-          order_id: id,
-        };
-        const order = await patchCancelOrder(data);
-        commit("SET_CANCELLED_ORDER", order.id);
-        console.log(order);
+        const total = cart.reduce((total, product) => {
+          return total + parseFloat(product.price) * product.quantity;
+        }, 0);
+        commit("SET_TOTAL_AMOUNT", total);
       } catch (error) {
         console.log(error);
       }

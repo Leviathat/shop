@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 import router from "@/router";
 
-export const getCart = () => {
+export const getCart = async () => {
   const cart = Cookies.get("cart");
   return cart ? JSON.parse(cart) : [];
 };
@@ -20,7 +20,6 @@ async function setCartCookie(products) {
 export const addToCart = async (productObj) => {
   let cart = await getCart();
   const existingProduct = cart.find((product) => product.id === productObj.id);
-
   if (existingProduct) {
     existingProduct.quantity++;
   } else {
@@ -28,9 +27,8 @@ export const addToCart = async (productObj) => {
       id: productObj.id,
       quantity: 1,
       name: productObj.name,
-      category: productObj.categories[0].name,
       price: productObj.price,
-      image: productObj.images[0].image,
+      image: productObj.images[0] ? productObj.images[0].image : null,
     });
   }
   await setCartCookie(cart);
@@ -40,6 +38,7 @@ export const addToCart = async (productObj) => {
 
 export const removeFromCart = async (productId) => {
   let cart = await getCart();
+  console.log(productId)
   const productIndex = cart.findIndex((product) => product.id === productId);
   console.log(productIndex);
   if (cart[productIndex].quantity > 1) {

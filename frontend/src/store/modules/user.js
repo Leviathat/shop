@@ -20,43 +20,36 @@ export default {
     async register({ commit, dispatch }, newUser) {
       const response = await registerUser(newUser);
       commit("SET_USER", response);
-      const payload = {}
-      
-      if (response.status) {
-        payload.message = "Вы успешно авторизовались"
-        payload.type = 2
-        router.push("/")
-      }
-      else {
-        payload.message = "Ошибка при авторизации"
-        payload.type = 4 
+      const payload = {};
+
+      if (response) {
+        payload.message = "Вы успешно зарегистрировались";
+        payload.type = 2;
+        router.push("/");
+      } else {
+        payload.message = "Ошибка при регистрации";
+        payload.type = 4;
       }
       dispatch("addAlert", payload);
     },
     async login({ commit, dispatch }, userData) {
       const response = await loginUser(userData);
       commit("SET_USER", response);
-      const payload = {}
-      
-      if (response.status) {
-        payload.message = "Вы успешно авторизовались"
-        payload.type = 2
-        router.push("/")
-      }
-      else {
-        payload.message = "Ошибка при авторизации"
-        payload.type = 4 
+      const payload = {};
+
+      if (response) {
+        payload.message = "Вы успешно авторизовались";
+        payload.type = 2;
+        router.push("/");
+      } else {
+        payload.message = "Ошибка при авторизации";
+        payload.type = 4;
       }
       dispatch("addAlert", payload);
     },
     async info({ commit }) {
-      try {
-        const response = await userInfo();
-        commit("SET_USER", response);
-      } catch (error) {
-        router.push("/login");
-        console.log(error);
-      }
+      const response = await userInfo();
+      commit("SET_USER", response);
     },
   },
 };

@@ -19,8 +19,11 @@
                 <div class="w-full flex pr-2">
                     <div class="w-full flex flex-row justify-between">
                         <div class="font-semibold flex  w-full">
-                            <img :src="product.image" alt="Abstract Design"
+
+                            <img v-if="product.image" :src="product.image" alt="Abstract Design"
                                 class="w-20 object-cover aspect-square drop-shadow-2xl rounded-md" />
+
+                            <img v-else src="/default.png" alt="Default image" class="h-full w-full object-cover">
                             <div class="flex flex-col px-4 justify-between w-full">
                                 <div class="flex flex-col">
                                     <div class="inline-flex space-x-2">
@@ -48,6 +51,7 @@
                         <span class="text-zinc-900 font-semibold">
                             ₸ {{ product.price / 1 }}</span>
                     </div>
+                    {{ product.id }}
                     <button @click="removeToCart(product.id)">
                         <span class="font-semibold text-rose-500 border-b-2 border-rose-500 py-1 ml-auto">Убрать</span>
                     </button>
@@ -91,5 +95,8 @@ export default {
             await this.$store.dispatch("removeProductFromCart", productId);
         },
     },
+    created() {
+        this.$store.dispatch("fetchCart")
+    }
 };
 </script>

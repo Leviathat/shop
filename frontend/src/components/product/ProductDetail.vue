@@ -16,8 +16,7 @@
                     </div>
                 </div>
                 <div v-else class="h-full w-full">
-                    <img src="https://notrated.duckdns.org/default.png" alt="Default image"
-                        class="h-full w-full object-cover">
+                    <img src="/default.png" alt="Default image" class="h-full w-full object-cover">
                 </div>
 
                 <div class="absolute flex justify-center w-full left-0 py-2 sm:py-4">

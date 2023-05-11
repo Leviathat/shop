@@ -38,7 +38,7 @@ export default {
     },
     getCurrentPage(state) {
       return state.currentPage;
-    }
+    },
   },
   mutations: {
     SET_PRODUCT_DATA(state, productData) {
@@ -58,33 +58,20 @@ export default {
     },
     SET_CURRENT_PAGE(state, currentPage) {
       state.currentPage = currentPage;
-    }
+    },
   },
   actions: {
     async fetchProducts({ commit, state }, pageNumber) {
-      try {
-        const response = await productList(state.filter.join(", "), pageNumber);
-        console.log(response)
-        commit("SET_PRODUCT_DATA", response.product);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await productList(state.filter.join(", "), pageNumber);
+      commit("SET_PRODUCT_DATA", response.product);
     },
     async fetchCategories({ commit }) {
-      try {
-        const response = await categoryList();
-        commit("SET_CATEGORIES", response.category);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await categoryList();
+      commit("SET_CATEGORIES", response.category);
     },
     async fetchSingleProduct({ commit }, id) {
-      try {
-        const response = await productArticle(id);
-        commit("SET_PRODUCT", response.product);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await productArticle(id);
+      commit("SET_PRODUCT", response.product);
     },
   },
   computed: {

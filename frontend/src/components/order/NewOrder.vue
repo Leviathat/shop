@@ -29,13 +29,6 @@ export default {
     name: "NewOrder",
     props: ['cart', 'user'],
     computed: {
-        total_amount: {
-            get() {
-                return this.cart.reduce((total, product) => {
-                    return total + (parseFloat(product.price) * product.quantity);
-                }, 0);
-            }
-        },
         shipping() {
             return this.total_amount * 5 / 100
         },
@@ -52,6 +45,11 @@ export default {
                 this.$store.commit("SET_ORDER", value)
             }
         },
+        total_amount: {
+            get() {
+                return this.$store.getters.getTotal;
+            }
+        }
     },
     methods: {
         async makeOrder() {
@@ -63,5 +61,8 @@ export default {
             await this.$store.dispatch("postOrder")
         },
     },
+    async mounted() {
+        await this.$store.dispatch("loadTotal")
+    }
 };
 </script>
