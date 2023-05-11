@@ -9,10 +9,11 @@
 
                 <div class="flex flex-row h-full duration-500" v-if="product.images.length > 0"
                     :style="{ transform: `translateX(-${currentImageIndex * 100}%)` }">
-                    <div v-for="(image, index) in product.images" :key="image" class="relative h-full w-full aspect-square">
+                    <div v-for="(image, index) in product.images" :key="image"
+                        class="drop-shadow-2xl h-full w-full aspect-square">
                         <img :src="image.image.replace('http://', 'https://')" alt="Abstract Design"
-                            :class="{ 'opacity-0': index !== currentImageIndex }"
-                            class="duration-500 h-full w-full object-cover drop-shadow-2xl absolute" />
+                            :class="{ 'opacity-0 z-0': index !== currentImageIndex }"
+                            class="duration-500 h-full w-full aspect-square object-cover" />
                     </div>
                 </div>
                 <div v-else class="h-full w-full aspect-square">
@@ -26,7 +27,7 @@
                     </button>
                 </div>
             </div>
-            <div class="h-full w-full bg-zinc-800 md:w-1/2 sm:aspect-square p-5 sm:p-10">
+            <div class="z-10 h-full w-full bg-zinc-800 md:w-1/2 sm:aspect-square p-5 sm:p-10">
                 <div class="w-full h-full mx-auto sm:aspect-square">
                     <div class="h-full flex flex-col justify-between">
                         <div class="flex flex-col">
