@@ -3,7 +3,7 @@
     <div class="mt-20" v-if="product.id">
 
         <div class="w-3/4 min-h-1/2 bg-zinc-200 mx-auto flex flex-col md:flex-row">
-            <div class="h-full w-full sm:w-1/2 aspect-square relative p-5 sm:p-10">
+            <div class="h-full w-full md:w-1/2 aspect-square relative p-5 sm:p-10">
                 <div class="w-1/3 absolute h-full z-30 left-0 top-0" @click="prevIndex"></div>
                 <div class="w-1/3 absolute h-full z-30 right-0 top-0" @click="nextIndex"></div>
 
