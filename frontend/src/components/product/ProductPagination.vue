@@ -34,7 +34,7 @@ export default {
     props: ['count', 'next', 'previous'],
     methods: {
         async fetchProducts(page) {
-            await this.$store.dispatch("fetchProducts", page);
+            await this.$store.dispatch("fetchProducts", page || 1);
             this.$store.dispatch("smoothScrool");
         }
     },
