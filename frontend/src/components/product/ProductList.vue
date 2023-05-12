@@ -11,7 +11,7 @@
                             class="w-full h-full object-cover aspect-square" />
                     </div>
                     <div v-else class="animate-pulse bg-zinc-200 w-full h-2/3 cursor-pointer">
-                        <img src="/default.png" alt="Default image" class="w-full h-full object-cover aspect-square">
+                        <img src="/default.webp" alt="Default image" class="w-full h-full object-cover aspect-square">
                     </div>
                     <div class="py-4 px-4 pt-1 max-h-1/3 ">
                         <div class="w-full flex flex-row justify-between">
