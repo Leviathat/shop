@@ -33,7 +33,7 @@ class ProductsAPIView(generics.GenericAPIView):
 
     def get(self, request):
         queryset = self.get_queryset()
-        filtered_queryset = self.filter_queryset(queryset)
+        filtered_queryset = self.filter_queryset(queryset).distinct()
         paginator = ProductPagination()
         result_page = paginator.paginate_queryset(filtered_queryset, request)
         serializer = self.serializer_class(result_page, many=True)
