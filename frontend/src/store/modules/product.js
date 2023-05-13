@@ -63,6 +63,7 @@ export default {
   actions: {
     async fetchProducts({ commit, state }, pageNumber) {
       const response = await productList(state.filter.join(", "), pageNumber);
+      console.log(response);
       commit("SET_PRODUCT_DATA", response.product);
     },
     async fetchCategories({ commit }) {
