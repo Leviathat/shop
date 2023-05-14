@@ -18,12 +18,12 @@
 
                 <div class="w-full flex pr-2">
                     <div class="w-full flex flex-row justify-between">
-                        <div class="font-semibold flex  w-full">
+                        <div class="font-semibold flex w-full">
+                            <img v-if="product.image" :src="product.image" alt="Abstract Design"
+                                class="w-20 h-20 object-contain drop-shadow-2xl rounded-md" />
 
-                            <img v-if="product.image" :src="'https://notrated.duckdns.org' + product.image"
-                                alt="Abstract Design" class="w-20 h-20 object-contain drop-shadow-2xl rounded-md" />
-
-                            <img v-else src="/default.webp" alt="Default image" class="h-full w-full object-cover">
+                            <img v-else src="/default.webp" alt="Default image"
+                                class="w-20 h-full object-contain rounded-md">
                             <div class="flex flex-col px-4 justify-between w-full">
                                 <div class="flex flex-col">
                                     <div class="inline-flex space-x-2">
