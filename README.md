@@ -7,10 +7,10 @@
 
 # Start dev project
 
-    $ docker-compose up 
+    $ docker-compose up
 
-___
+---
 
->  **You can check out documentation on following link** `↓`
-> 
+> **You can check out deployed project on following [link](https://notrated.duckdns.org)** `↓`
+>
 > **[DOCUMENTATION](https://documenter.getpostman.com/view/16363895/2s93XsWkAx)**
