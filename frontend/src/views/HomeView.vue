@@ -29,8 +29,7 @@
                         </svg>
                     </div>
                     <img class="absolute z-0 w-full h-full object-cover top-0 left-0 opacity-25"
-                        src="https://cdn.shopify.com/s/files/1/0305/7100/4043/articles/Vintage_style_grande.jpg?v=1654538838"
-                        alt="Category image">
+                        :src="category.image.replace('http://', 'https://')" alt="Category image">
 
                 </label>
             </div>

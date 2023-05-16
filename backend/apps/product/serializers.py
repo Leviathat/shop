@@ -25,6 +25,12 @@ class CategorySerializer(serializers.ModelSerializer):
         return instance
 
 
+class CategoryListSerializer(serializers.ModelSerializer):
+    class Meta:
+            model = Category
+            fields = ('id', 'name', 'image')
+
+
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage

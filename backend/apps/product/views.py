@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from django_filters import rest_framework as filters
 
 from apps.product.renderers import ProductJSONRenderer, CategoryJSONRenderer
-from apps.product.serializers import ProductSerializer, CategorySerializer
+from apps.product.serializers import ProductSerializer, CategoryListSerializer
 from apps.product.models import Product, Category
 from apps.product.services import ProductFilter, ProductPagination
 
@@ -52,7 +52,7 @@ class ProductsAPIView(generics.GenericAPIView):
 
 
 class CategoriesAPIView(generics.GenericAPIView):
-    serializer_class = CategorySerializer
+    serializer_class = CategoryListSerializer
     permission_classes = (AllowAny, )
     renderer_classes = (CategoryJSONRenderer,)
 

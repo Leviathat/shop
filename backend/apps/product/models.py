@@ -1,19 +1,10 @@
-import os
 from django.db import models
-from django.utils import timezone
-import random
-
-
-def get_image_path(instance, filename):
-    now = timezone.now()
-    delta = timezone.timedelta(days=30)
-    random_timestamp = now - delta * random.random()
-    _, extension = os.path.splitext(filename)
-    return os.path.join('products', f'{str(random_timestamp)}{extension}')
+from apps.product.utils import get_product_image_path, get_category_image_path
 
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    image = models.ImageField(upload_to=get_category_image_path)
 
     def __str__(self):
         return self.name
@@ -59,7 +50,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=get_image_path)
+    image = models.ImageField(upload_to=get_product_image_path)
 
     class Meta:
         db_table = 'product_image'
