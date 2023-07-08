@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 export const productList = async (filters, pageNumber) => {
   try {
     const response = await axiosInstance.get("/products/", { params: { categories: filters, page: pageNumber } });
-    return response.data;
+    return response.data.product;
   } catch (error) {
     console.log(error.response.data);
   }
@@ -16,7 +16,7 @@ export const productList = async (filters, pageNumber) => {
 export const productArticle = async (id) => {
   try {
     const response = await axiosInstance.get(`/products/${id}/`)
-    return response.data;
+    return response.data.product;
   } catch (error) {
     console.log(error.response.data);
   }

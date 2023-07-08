@@ -64,15 +64,15 @@ export default {
     async fetchProducts({ commit, state }, pageNumber) {
       const response = await productList(state.filter.join(", "), pageNumber);
       console.log(response);
-      commit("SET_PRODUCT_DATA", response.product);
+      commit("SET_PRODUCT_DATA", response);
     },
     async fetchCategories({ commit }) {
       const response = await categoryList();
-      commit("SET_CATEGORIES", response.category);
+      commit("SET_CATEGORIES", response);
     },
     async fetchSingleProduct({ commit }, id) {
       const response = await productArticle(id);
-      commit("SET_PRODUCT", response.product);
+      commit("SET_PRODUCT", response);
     },
   },
   computed: {
